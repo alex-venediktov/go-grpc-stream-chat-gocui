@@ -1,0 +1,9 @@
+go 1.19
+
+use (
+	./api
+	./cmd/server
+	./cmd/client
+	./pkg/api
+	./pkg/chat
+)

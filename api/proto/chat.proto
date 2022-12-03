@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package api;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "./pkg/api";
+
+message Message {
+  google.protobuf.Timestamp timestamp = 1;
+  string from = 2;
+  string text = 3;
+}
+
+message MessageRequest {
+  google.protobuf.Timestamp sinceTimestamp = 1;
+  optional string text = 2;
+}
+
+service Chat {
+  rpc RouteMessages (stream MessageRequest) returns (stream Message) {}
+}
