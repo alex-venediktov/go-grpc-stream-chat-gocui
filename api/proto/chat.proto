@@ -6,17 +6,20 @@ import "google/protobuf/timestamp.proto";
 
 option go_package = "./pkg/api";
 
-message Message {
-  google.protobuf.Timestamp timestamp = 1;
-  string from = 2;
-  string text = 3;
+enum Status {
+  Text = 0;
+  Online = 1;
+  Offline = 2;
+  AutoText = 3;
 }
 
-message MessageRequest {
-  google.protobuf.Timestamp sinceTimestamp = 1;
+message Message {
+  google.protobuf.Timestamp timestamp = 1;
   optional string text = 2;
+  optional string from = 3;
+  Status status = 4;
 }
 
 service Chat {
-  rpc RouteMessages (stream MessageRequest) returns (stream Message) {}
+  rpc RouteMessages (stream Message) returns (stream Message) {}
 }
